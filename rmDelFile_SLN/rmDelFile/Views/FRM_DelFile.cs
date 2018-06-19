@@ -277,7 +277,7 @@ namespace rmDelFile
 
             }
         }
-        
+
         /// <summary>
         /// Traitement principal.
         /// </summary>
@@ -286,9 +286,9 @@ namespace rmDelFile
         public void buttonstart_Click(object sender, EventArgs e)
         {
             progressBar.Visible = true;
-            progressBar.Maximum = 100;
+            progressBar.Maximum = 1000;
             progressBar.Minimum = 0;
-            progressBar.Step = 1;
+            progressBar.Step = 10;
             progressBar.PerformStep();
             DateTime DateSuppr;
             decimal jours;
@@ -310,7 +310,7 @@ namespace rmDelFile
                 fic = Di.GetFiles("*", SearchOption.TopDirectoryOnly);
             }
             Console.WriteLine("FORMAT :");
-
+            progressBar.PerformStep();
             foreach (string f in format)
             {
                 Console.WriteLine(f);
@@ -321,6 +321,7 @@ namespace rmDelFile
 
                 Console.WriteLine(f);
             }
+
             progressBar.PerformStep();
             jours = numericUpDown2.Value;
             Console.WriteLine(jours);
@@ -328,21 +329,22 @@ namespace rmDelFile
             Console.WriteLine("DateSUPPR : ");
             Console.WriteLine(DateSuppr);
 
-            // Récupère la liste des fichiers correspondant à la date de suppression.
             progressBar.PerformStep();
+
+            // Récupère la liste des fichiers correspondant à la date de suppression.
             if (RBcreation.Checked)
                 LAllFile = fic.Where(a => DateSuppr > a.CreationTime).ToList();
             else
                 LAllFile = fic.Where(a => DateSuppr > a.LastWriteTime).ToList();
             Console.WriteLine("FICIERDATELISTES");
+            progressBar.PerformStep();
             foreach (FileInfo fi in LAllFile)
             {
-                progressBar.PerformStep();
 
                 Console.WriteLine(fi.CreationTime);
             }
-            progressBar.PerformStep();
 
+            progressBar.PerformStep();
             // Récupère la liste des fichiers correspondant aux types.
             if (CBTousT.Checked == true)
             {
@@ -353,14 +355,13 @@ namespace rmDelFile
             {
                 foreach (string i in type)
                 {
-                    progressBar.PerformStep();
                     Console.WriteLine(i);
                     LTypeFile.AddRange(LAllFile.Where(a => a.Name.ToUpper().StartsWith(i)));
                 }
             }
 
-            // Récupère la liste des fichiers correspondant aux formats.
             progressBar.PerformStep();
+            // Récupère la liste des fichiers correspondant aux formats.
             if (CBTousF.Checked == true)
             {
                 LFormat = LTypeFile;
@@ -376,29 +377,49 @@ namespace rmDelFile
             }
 
             //for (int i = 0; i < type.Count; i++)
-
+            progressBar.PerformStep();
             Console.WriteLine("FICHASUPPR:");
             foreach (FileInfo i in LFormat)
             {
-                progressBar.PerformStep();
                 Console.WriteLine(i);
                 listeDelFile.Add(i.FullName);
             }
-            progressBar.PerformStep();
 
+            progressBar.PerformStep();
 
             int NBDelFile = LFormat.Count;
             FinalList = Helpers.Helpers.GetDelete(LFormat);
 
             // Liste de nom.
             List<string> NameList = new List<string>(FinalList.Keys);
-        
+
             // Liste d'exception.
             List<string> ExceptList = new List<string>(FinalList.Values);
 
 
             Helpers.Helpers.GetLogsErreurs(NameList, ExceptList);
             Helpers.Helpers.GetLogs(listeDelFile, NameList);
+
+            if (listeDelFile.Count > 0)
+            {
+                int Nbfichier = 900 / listeDelFile.Count;
+                Console.WriteLine("Nbfichier");
+                Console.WriteLine(Nbfichier);
+                progressBar.Step = Convert.ToInt32(Nbfichier);
+            }
+            foreach (string name in listeDelFile)
+            {
+                bool rep = Helpers.Helpers.GetProgressBar(name, NameList);
+                if (rep == true)
+                {
+                    progressBar.PerformStep();
+                }
+            }
+
+            if (progressBar.Value < 1000)
+            {
+                progressBar.Value = 1000;
+            }
             if (LFormat.Count == 0)
             {
                 MessageBox.Show("Aucun fichier n'a été supprimé, vérifier les options.");
@@ -416,80 +437,41 @@ namespace rmDelFile
                         "afin de vous renseignez sur le(s) fichier(s) non supprimé(s)");
                 }
             }
-            if (progressBar.Value < 100)
-            {
-                progressBar.Value = 100;
 
-            }
 
 
             //string OuiOuNon = "";
             //bool toto = false;
             //OuiOuNon = toto == true ? "Oui" : "Non";
             //Fin a supp
-            /*foreach (FileInfo fichier in listeFicATraiter)
-            {
 
-                if (CBbl.Checked == true)
-                {
-                    searchP = "BL";
-                    Filist.AddRange(Methode.GetList(fichier, searchP));
-                }
-
-                if (CBpod.Checked == true)
-                {
-                    searchP = "POD";
-                    Filist.AddRange(Methode.GetList(fichier, searchP));
-
-                }
-
-                if (CBfac.Checked == true)
-                {
-                    searchP = "FAC";
-                    Filist.AddRange(Methode.GetList(fichier, searchP));
-
-                }
-
-                if (CBpd.Checked == true)
-                {
-                    searchP = "PD";
-                    Filist.AddRange(Methode.GetList(fichier, searchP));
-
-                }
-
-                if (CBlit.Checked == true)
-                {
-                    searchP = "LIT";
-                    Filist.AddRange(Methode.GetList(fichier, searchP));
-
-                }
-
-                if (CBTousT.Checked == true)
-                {
-                    searchP = "*";
-                    Filist = listeFicATraiter;
-
-                }
-
-            }*/
 
 
         }
-
-
 
         private void comboBoxtest_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-
         private void progressBar_Click(object sender, EventArgs e)
         {
 
         }
 
+        //private int addition(int a, int b, out string comment)
+        //{
+        //    int result = a + b;
+        //    comment = "Calcul ok";
+        //    return result;
+        //}
 
+        //private void test()
+        //{
+        //    string leComment = "";
+        //    int result = addition(2, 2, out leComment);
+        //    Console.WriteLine($"Mon résultat est : {result} - etat de la méthode {leComment}");
+        //}
     }
 }
 

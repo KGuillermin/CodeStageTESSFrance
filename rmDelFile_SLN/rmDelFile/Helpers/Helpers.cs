@@ -10,6 +10,25 @@ namespace rmDelFile.Helpers
     public static class Helpers
     {
         /// <summary>
+        /// Avancement de la barre de progression par rapport aux fichiers supprimer.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="LApSuppr"></param>
+        /// <returns></returns>
+        public static bool GetProgressBar(string name, List<string> LApSuppr)
+        {
+            bool rep = true;
+            if (!LApSuppr.Contains(name))
+            {
+                rep = true;
+
+            }
+            return rep;
+            
+            
+        }
+
+        /// <summary>
         /// Suppression des fichiers.
         /// </summary>
         /// <param name="FlistF"></param>
@@ -23,6 +42,7 @@ namespace rmDelFile.Helpers
                 try
                 {
                     files.Delete();
+                    
                 }
                 catch (Exception ex)
                 {
