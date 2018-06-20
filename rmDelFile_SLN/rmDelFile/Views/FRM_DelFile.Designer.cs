@@ -78,6 +78,7 @@
             this.groupBoxformat.TabIndex = 0;
             this.groupBoxformat.TabStop = false;
             this.groupBoxformat.Text = "Format de fichier";
+            this.groupBoxformat.Enter += new System.EventHandler(this.groupBoxformat_Enter);
             // 
             // CBpdf
             // 
@@ -158,9 +159,9 @@
             // 
             // groupBoxtype
             // 
+            this.groupBoxtype.Controls.Add(this.CBfac);
             this.groupBoxtype.Controls.Add(this.CBTousT);
             this.groupBoxtype.Controls.Add(this.CBlit);
-            this.groupBoxtype.Controls.Add(this.CBfac);
             this.groupBoxtype.Controls.Add(this.CBbl);
             this.groupBoxtype.Controls.Add(this.CBpod);
             this.groupBoxtype.Controls.Add(this.CBpd);
@@ -339,6 +340,7 @@
             // 
             // buttonstart
             // 
+            this.buttonstart.Enabled = false;
             this.buttonstart.Location = new System.Drawing.Point(86, 303);
             this.buttonstart.Name = "buttonstart";
             this.buttonstart.Size = new System.Drawing.Size(75, 23);

@@ -18,6 +18,8 @@ namespace rmDelFile
 {
     public partial class FRM_DelFile : Form
     {
+        List<string> Paraformat = new List<string>();
+        List<string> Paratype = new List<string>();
         List<string> format = new List<string>();
         List<string> type = new List<string>();
         List<string> Parametre = new List<string>();
@@ -36,6 +38,9 @@ namespace rmDelFile
                   comboBoxRep.Items.Add(dire.Name);
               }
               */
+
+
+
             foreach (string parametre in Environment.GetCommandLineArgs())
             {
                 Console.WriteLine(parametre);
@@ -46,20 +51,40 @@ namespace rmDelFile
             Console.WriteLine(textBoxpath.Text);
             CBSrep.Checked = Convert.ToBoolean(Parametre[2]);
             numericUpDown2.Value = Convert.ToInt32(Parametre[3]);
-            type = Parametre[4].ToUpper().Split(',').ToList();
-            foreach (string p in type)
+            Paratype = Parametre[4].ToUpper().Split(',').ToList();
+            foreach (string p in Paratype)
             {
                 Console.WriteLine(p);
             }
-            
-            format = Parametre[5].ToUpper().Split(',').ToList();
-            if (Parametre[6] == "creation")
+
+            Paraformat = Parametre[5].ToUpper().Split(',').ToList();
+            foreach (string p in Paraformat)
+            {
+                Console.WriteLine(p);
+            }
+            if (Parametre[6] == "C")
             {
                 RBcreation.Checked = true;
             }
             else
             {
                 RBmodif.Checked = true;
+            }
+
+            foreach (CheckBox c in groupBoxformat.Controls.OfType<CheckBox>())
+            {
+                if (Paraformat.Contains(c.Text.ToUpper()))
+                {
+                    c.Checked = true;
+                }
+            }
+
+            foreach (CheckBox c in groupBoxtype.Controls.OfType<CheckBox>())
+            {
+                if (Paratype.Contains(c.Text.ToUpper()))
+                {
+                    c.Checked = true;
+                }
             }
 
         }
@@ -109,7 +134,14 @@ namespace rmDelFile
         {
             // Récupération des formats
             CheckBox cboxf = (CheckBox)sender;
-/*
+
+            foreach (string format in Paraformat)
+            {
+                if (format == cboxf.Text.ToUpper())
+                {
+                    cboxf.Checked = true;
+                }
+            }
             if (cboxf.Checked == true && !format.Contains(cboxf.Text.ToUpper()))
             {
                 format.Add(cboxf.Text.ToUpper());
@@ -139,9 +171,9 @@ namespace rmDelFile
             else
             {
                 buttonstart.Enabled = false;
-            }*/
+            }
 
-            if(type.Count > 0 && format.Count > 0)
+            if (type.Count > 0 && format.Count > 0)
             {
                 buttonstart.Enabled = true;
             }
@@ -151,7 +183,14 @@ namespace rmDelFile
         public void CheckBoxType(object sender, EventArgs e)
         {
             CheckBox cboxt = (CheckBox)sender;
-/*
+
+            foreach (string type in Paratype)
+            {
+                if (type == cboxt.Text)
+                {
+                    cboxt.Checked = true;
+                }
+            }
             if (cboxt.Checked == true && !type.Contains(cboxt.Text.ToUpper()))
             {
                 type.Add(cboxt.Text.ToUpper());
@@ -166,7 +205,7 @@ namespace rmDelFile
                 type.Clear();
 
             }
-            
+
             if (((CBbl.Checked == true) || (CBpod.Checked == true) || (CBfac.Checked == true) || (CBpd.Checked == true) ||
                 (CBlit.Checked == true) || (CBTousT.Checked == true)) &&
                 ((CBjpg.Checked == true) ||
@@ -181,7 +220,7 @@ namespace rmDelFile
             else
             {
                 buttonstart.Enabled = false;
-            }*/
+            }
 
         }
 
@@ -218,7 +257,7 @@ namespace rmDelFile
 
             }
 
-            /*if (((CBbl.Checked == true) || (CBpod.Checked == true) || (CBfac.Checked == true) || (CBpd.Checked == true) ||
+            if (((CBbl.Checked == true) || (CBpod.Checked == true) || (CBfac.Checked == true) || (CBpd.Checked == true) ||
                 (CBlit.Checked == true) || (CBTousT.Checked == true)) &&
                 ((CBjpg.Checked == true) ||
                 (CBtif.Checked == true) ||
@@ -232,7 +271,7 @@ namespace rmDelFile
             else
             {
                 buttonstart.Enabled = false;
-            }*/
+            }
 
 
         }
@@ -495,6 +534,11 @@ namespace rmDelFile
         }
 
         private void Button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBoxformat_Enter(object sender, EventArgs e)
         {
 
         }
