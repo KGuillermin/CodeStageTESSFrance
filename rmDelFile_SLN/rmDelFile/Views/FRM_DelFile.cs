@@ -20,6 +20,7 @@ namespace rmDelFile
     {
         List<string> format = new List<string>();
         List<string> type = new List<string>();
+        List<string> Parametre = new List<string>();
         public FRM_DelFile()
         {
             InitializeComponent();
@@ -35,6 +36,31 @@ namespace rmDelFile
                   comboBoxRep.Items.Add(dire.Name);
               }
               */
+            foreach (string parametre in Environment.GetCommandLineArgs())
+            {
+                Console.WriteLine(parametre);
+                Parametre.Add(parametre);
+            }
+            textBoxpath.Text = Parametre[1];
+            Console.WriteLine("test");
+            Console.WriteLine(textBoxpath.Text);
+            CBSrep.Checked = Convert.ToBoolean(Parametre[2]);
+            numericUpDown2.Value = Convert.ToInt32(Parametre[3]);
+            type = Parametre[4].ToUpper().Split(',').ToList();
+            foreach (string p in type)
+            {
+                Console.WriteLine(p);
+            }
+            
+            format = Parametre[5].ToUpper().Split(',').ToList();
+            if (Parametre[6] == "creation")
+            {
+                RBcreation.Checked = true;
+            }
+            else
+            {
+                RBmodif.Checked = true;
+            }
 
         }
 
@@ -83,7 +109,7 @@ namespace rmDelFile
         {
             // Récupération des formats
             CheckBox cboxf = (CheckBox)sender;
-
+/*
             if (cboxf.Checked == true && !format.Contains(cboxf.Text.ToUpper()))
             {
                 format.Add(cboxf.Text.ToUpper());
@@ -113,6 +139,11 @@ namespace rmDelFile
             else
             {
                 buttonstart.Enabled = false;
+            }*/
+
+            if(type.Count > 0 && format.Count > 0)
+            {
+                buttonstart.Enabled = true;
             }
 
         }
@@ -120,7 +151,7 @@ namespace rmDelFile
         public void CheckBoxType(object sender, EventArgs e)
         {
             CheckBox cboxt = (CheckBox)sender;
-
+/*
             if (cboxt.Checked == true && !type.Contains(cboxt.Text.ToUpper()))
             {
                 type.Add(cboxt.Text.ToUpper());
@@ -135,7 +166,7 @@ namespace rmDelFile
                 type.Clear();
 
             }
-
+            
             if (((CBbl.Checked == true) || (CBpod.Checked == true) || (CBfac.Checked == true) || (CBpd.Checked == true) ||
                 (CBlit.Checked == true) || (CBTousT.Checked == true)) &&
                 ((CBjpg.Checked == true) ||
@@ -150,7 +181,7 @@ namespace rmDelFile
             else
             {
                 buttonstart.Enabled = false;
-            }
+            }*/
 
         }
 
@@ -187,7 +218,7 @@ namespace rmDelFile
 
             }
 
-            if (((CBbl.Checked == true) || (CBpod.Checked == true) || (CBfac.Checked == true) || (CBpd.Checked == true) ||
+            /*if (((CBbl.Checked == true) || (CBpod.Checked == true) || (CBfac.Checked == true) || (CBpd.Checked == true) ||
                 (CBlit.Checked == true) || (CBTousT.Checked == true)) &&
                 ((CBjpg.Checked == true) ||
                 (CBtif.Checked == true) ||
@@ -201,11 +232,12 @@ namespace rmDelFile
             else
             {
                 buttonstart.Enabled = false;
-            }
+            }*/
+
 
         }
 
-        private void Buttonstartacces(Object sender, EventArgs e)
+        private void Buttonstartacces(object sender, EventArgs e)
         {
             if (((CBbl.Checked == true) || (CBpod.Checked == true) || (CBfac.Checked == true) || (CBpd.Checked == true) ||
                 (CBlit.Checked == true) || (CBTousT.Checked == true)) &&
@@ -278,6 +310,7 @@ namespace rmDelFile
             }
         }
 
+
         /// <summary>
         /// Traitement principal.
         /// </summary>
@@ -285,7 +318,9 @@ namespace rmDelFile
         /// <param name="e"></param>
         public void buttonstart_Click(object sender, EventArgs e)
         {
+
             progressBar.Visible = true;
+            progressBar.Value = 0;
             progressBar.Maximum = 1000;
             progressBar.Minimum = 0;
             progressBar.Step = 10;
@@ -455,6 +490,11 @@ namespace rmDelFile
         }
 
         private void progressBar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
         {
 
         }

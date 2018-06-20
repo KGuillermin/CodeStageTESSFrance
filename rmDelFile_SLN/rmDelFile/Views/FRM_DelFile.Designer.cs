@@ -44,7 +44,7 @@
             this.CBpod = new System.Windows.Forms.CheckBox();
             this.CBpd = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.radioButtonm = new System.Windows.Forms.RadioButton();
+            this.RBmodif = new System.Windows.Forms.RadioButton();
             this.RBcreation = new System.Windows.Forms.RadioButton();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
@@ -239,7 +239,7 @@
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.radioButtonm);
+            this.groupBox5.Controls.Add(this.RBmodif);
             this.groupBox5.Controls.Add(this.RBcreation);
             this.groupBox5.Location = new System.Drawing.Point(521, 171);
             this.groupBox5.Name = "groupBox5";
@@ -248,15 +248,15 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Baser sur la date de";
             // 
-            // radioButtonm
+            // RBmodif
             // 
-            this.radioButtonm.AutoSize = true;
-            this.radioButtonm.Location = new System.Drawing.Point(103, 60);
-            this.radioButtonm.Name = "radioButtonm";
-            this.radioButtonm.Size = new System.Drawing.Size(81, 17);
-            this.radioButtonm.TabIndex = 1;
-            this.radioButtonm.Text = "modification";
-            this.radioButtonm.UseVisualStyleBackColor = true;
+            this.RBmodif.AutoSize = true;
+            this.RBmodif.Location = new System.Drawing.Point(103, 60);
+            this.RBmodif.Name = "RBmodif";
+            this.RBmodif.Size = new System.Drawing.Size(81, 17);
+            this.RBmodif.TabIndex = 1;
+            this.RBmodif.Text = "modification";
+            this.RBmodif.UseVisualStyleBackColor = true;
             // 
             // RBcreation
             // 
@@ -339,7 +339,6 @@
             // 
             // buttonstart
             // 
-            this.buttonstart.Enabled = false;
             this.buttonstart.Location = new System.Drawing.Point(86, 303);
             this.buttonstart.Name = "buttonstart";
             this.buttonstart.Size = new System.Drawing.Size(75, 23);
@@ -407,7 +406,7 @@
         private System.Windows.Forms.GroupBox groupBoxformat;
         private System.Windows.Forms.GroupBox groupBoxtype;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.RadioButton radioButtonm;
+        private System.Windows.Forms.RadioButton RBmodif;
         private System.Windows.Forms.RadioButton RBcreation;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
