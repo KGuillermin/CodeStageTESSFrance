@@ -30,22 +30,12 @@ namespace rmDelFile
 
         public void Form1_Load(object sender, EventArgs e)
         {
-            /*  DirectoryInfo di = new DirectoryInfo(@"C:\\");
-              DirectoryInfo[] dir = di.GetDirectories();
-
-              foreach (DirectoryInfo dire in dir)
-              {
-                  comboBoxRep.Items.Add(dire.Name);
-              }
-              */
-
-
-
             foreach (string parametre in Environment.GetCommandLineArgs())
             {
                 Console.WriteLine(parametre);
                 Parametre.Add(parametre);
             }
+
             textBoxpath.Text = Parametre[1];
             Console.WriteLine("test");
             Console.WriteLine(textBoxpath.Text);

@@ -49,6 +49,9 @@
   <PropertyGroup>
     <StartupObject>rmDelFile.Program</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Road Manager initialesTriangle TMS.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -67,17 +70,20 @@
     <Compile Include="Ctest.cs" />
     <Compile Include="Enumerations\MonEnum.cs" />
     <Compile Include="Helpers\Helpers.cs" />
-    <Compile Include="Views\FRM_DelFile.cs">
+    <Compile Include="C:\Users\UserPC\Desktop\FRM_DelFile.cs">
       <SubType>Form</SubType>
+      <Link>Views\FRM_DelFile.cs</Link>
     </Compile>
-    <Compile Include="Views\FRM_DelFile.Designer.cs">
+    <Compile Include="C:\Users\UserPC\Desktop\FRM_DelFile.Designer.cs">
       <DependentUpon>FRM_DelFile.cs</DependentUpon>
+      <Link>Views\FRM_DelFile.Designer.cs</Link>
     </Compile>
     <Compile Include="Models\Methode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Views\FRM_DelFile.resx">
+    <EmbeddedResource Include="C:\Users\UserPC\Desktop\FRM_DelFile.resx">
       <DependentUpon>FRM_DelFile.cs</DependentUpon>
+      <Link>Views\FRM_DelFile.resx</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -114,6 +120,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Road Manager initialesTriangle TMS.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
